@@ -34,9 +34,9 @@ if (isset($_GET['search_btn'])) {
     $keyword = mysqli_real_escape_string($conn, $_GET['keyword']);
     $department = mysqli_real_escape_string($conn, $_GET['department']);
 
-    // Searches by: Ref Number, Title, Sender, or Year
+    // Searches by: Ref Number, Title, Sender, or Ethiopian Date Columns
     if (!empty($keyword)) {
-        $query .= " AND (ref_number LIKE '%$keyword%' OR title LIKE '%$keyword%' OR sender_receiver LIKE '%$keyword%' OR document_date LIKE '%$keyword%')";
+        $query .= " AND (ref_number LIKE '%$keyword%' OR title LIKE '%$keyword%' OR sender_receiver LIKE '%$keyword%' OR eth_year LIKE '%$keyword%' OR eth_month LIKE '%$keyword%' OR eth_day LIKE '%$keyword%')";
     }
 
     // Filter by department (Only for Admin and Manager, Staff is locked to their own department)
@@ -79,7 +79,7 @@ $dept_result = mysqli_query($conn, $dept_query);
     </style>
 </head>
 <body>
-<!-- New Clean Universal Navigation Bar (Without search.php) -->
+<!-- New Universal Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow-sm py-3">
     <div class="container">
         <a class="navbar-brand fw-bold" href="dashboard.php">
@@ -94,7 +94,7 @@ $dept_result = mysqli_query($conn, $dept_query);
                     <a class="nav-link" href="dashboard.php"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
                 </li>
                 
-                <!-- DROPDOWN 1: File Management (Cleaned up!) -->
+                <!-- DROPDOWN 1: File Management -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="docDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-file-earmark-text-fill me-1"></i> File Management
@@ -143,7 +143,7 @@ $dept_result = mysqli_query($conn, $dept_query);
     <div class="row justify-content-center">
         <div class="col-md-11">
             
-            <!-- NEW SECTION: Search & Filter Card (Upgraded: 5-4-3 grid spacing to fit on ONE line!) -->
+            <!-- Search & Filter Card -->
             <div class="card shadow-sm border-0 rounded-3 mb-4">
                 <div class="card-header bg-white py-3 fw-bold text-dark border-bottom">
                     <i class="bi bi-search text-primary me-2"></i> Search & Filter Archives
@@ -151,7 +151,7 @@ $dept_result = mysqli_query($conn, $dept_query);
                 <div class="card-body p-4">
                     <form action="files.php" method="GET">
                         <div class="row g-3">
-                            <!-- Keyword Search (col-md-5) -->
+                            <!-- Keyword Search -->
                             <div class="col-md-5">
                                 <label for="keyword" class="form-label fw-semibold text-secondary">Search Keyword</label>
                                 <input type="text" class="form-control py-2" id="keyword" name="keyword" 
@@ -159,7 +159,7 @@ $dept_result = mysqli_query($conn, $dept_query);
                                        placeholder="Search by Ref, Title, Sender, or Year...">
                             </div>
 
-                            <!-- Department Dropdown (col-md-4) -->
+                            <!-- Department Dropdown -->
                             <div class="col-md-4">
                                 <label for="department" class="form-label fw-semibold text-secondary">Filter by Department</label>
                                 <?php if ($user_role == 'Admin' || $user_role == 'Manager'): ?>
@@ -180,7 +180,7 @@ $dept_result = mysqli_query($conn, $dept_query);
                                 <?php endif; ?>
                             </div>
 
-                            <!-- Search & Reset Buttons (col-md-3: Aligns on one line!) -->
+                            <!-- Search & Reset Buttons -->
                             <div class="col-md-3 d-flex gap-2 align-self-end">
                                 <button type="submit" name="search_btn" class="btn btn-primary py-2 fw-bold w-100" style="background-color: #1a365d; border: none;">
                                     <i class="bi bi-search me-1"></i> Search
@@ -228,7 +228,7 @@ $dept_result = mysqli_query($conn, $dept_query);
                                                 <td><?php echo htmlspecialchars($row['title']); ?></td>
                                                 <td><?php echo htmlspecialchars($row['sender_receiver']); ?></td>
                                                 <td><span class="badge bg-secondary"><?php echo htmlspecialchars($row['department']); ?></span></td>
-                                                <td class="text-muted fw-semibold"><?php echo htmlspecialchars($row['document_date']); ?></td>
+                                                <td class="text-muted fw-semibold"><?php echo htmlspecialchars($row['eth_day'] . '/' . $row['eth_month'] . '/' . $row['eth_year']); ?></td>
                                                 <td>
                                                     <!-- 1. PREVIEW Button -->
                                                     <a href="uploads/<?php echo $row['file_name']; ?>" target="_blank" class="btn btn-sm btn-outline-primary fw-bold">
@@ -243,11 +243,11 @@ $dept_result = mysqli_query($conn, $dept_query);
                                                         <i class="bi bi-send-fill me-1"></i> Transfer
                                                     </a>
                                                    <!-- 4. DELETE Button (Only visible to Admin and Manager) -->
-<?php if ($user_role == 'Admin' || $user_role == 'Manager'): ?>
-    <a href="delete_process.php?id=<?php echo $row['id']; ?>&redirect=files" onclick="return confirm('Are you sure you want to move this file to Trash Bin?')" class="btn btn-sm btn-outline-danger fw-bold ms-1">
-        <i class="bi bi-trash-fill me-1"></i> Delete
-    </a>
-<?php endif; ?>
+                                                    <?php if ($user_role == 'Admin' || $user_role == 'Manager'): ?>
+                                                        <a href="delete_process.php?id=<?php echo $row['id']; ?>&redirect=files" onclick="return confirm('Are you sure you want to move this file to Trash Bin?')" class="btn btn-sm btn-outline-danger fw-bold ms-1">
+                                                            <i class="bi bi-trash-fill me-1"></i> Delete
+                                                        </a>
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>
