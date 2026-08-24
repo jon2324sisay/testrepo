@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 $host = "sql202.infinityfree.com";
 $username = "if0_42712329";
 $password = "8FzYyQMhFq85A";
