@@ -1,7 +1,8 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
+error_reporting(0);
+ini_set('display_errors', 0);
 $host = "sql202.infinityfree.com";
+...
 $username = "if0_42712329";
 $password = "8FzYyQMhFq85A";
 $dbname = "if0_42712329_office";
