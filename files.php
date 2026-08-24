@@ -228,7 +228,8 @@ $dept_result = mysqli_query($conn, $dept_query);
                                                 <td><?php echo htmlspecialchars($row['title']); ?></td>
                                                 <td><?php echo htmlspecialchars($row['sender_receiver']); ?></td>
                                                 <td><span class="badge bg-secondary"><?php echo htmlspecialchars($row['department']); ?></span></td>
-                                                <td class="text-muted fw-semibold"><?php echo htmlspecialchars($row['eth_day'] . '/' . $row['eth_month'] . '/' . $row['eth_year']); ?></td>
+                                                <td class="text-muted fw-semibold"><?php echo htmlspecialchars($row['document_date']); ?></td>
+                                                <td>
                                                     <!-- 1. PREVIEW Button -->
                                                     <a href="uploads/<?php echo $row['file_name']; ?>" target="_blank" class="btn btn-sm btn-outline-primary fw-bold">
                                                         <i class="bi bi-eye-fill me-1"></i> view
