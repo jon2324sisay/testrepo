@@ -47,7 +47,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 sticky-top">
     <div class="container">
         <!-- Far Left: Brand Logo -->
-        <a class="navbar-brand fw-bold text-primary" href="index.php" style="color: #1a365d !important;">
+        <a class="navbar-brand fw-bold" href="index.php" style="color: #1a365d !important;">
             <i class="bi bi-folder-fill me-2"></i>Office File Management
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -144,10 +144,10 @@
     </div>
 </section>
 
-<!-- About Us, Mission & Vision Section (Upgraded: Icon is closer, and Mission/Vision cards are beautifully added!) -->
+<!-- About Us, Mission & Vision Section -->
 <section id="about" class="bg-white py-5 border-top">
     <div class="container my-4">
-        <!-- Top Row: About Us Text and Icon (Icon closer) -->
+        <!-- Top Row: About Us Text and Icon -->
         <div class="row align-items-center mb-5">
             <div class="col-md-4 mb-4 mb-md-0 text-center">
                 <i class="bi bi-building-fill text-secondary opacity-25" style="font-size: 8rem;"></i>
@@ -158,7 +158,7 @@
             </div>
         </div>
 
-        <!-- Bottom Row: Mission and Vision Cards -->
+        <!-- Bottom Row: Mission and Vision Cards (Beautifully Upgraded!) -->
         <div class="row justify-content-center g-4 mt-2">
             <!-- Mission Card -->
             <div class="col-md-5">
@@ -167,7 +167,7 @@
                         <i class="bi bi-target" style="font-size: 2.5rem; color: #1a365d;"></i>
                     </div>
                     <h5 class="fw-bold text-dark">Our Mission</h5>
-                    <p class="text-secondary mb-0" style="font-size: 1.05rem; line-height: 1.7;">To provide office administrations with a secure, fast, and digital platform to upload, search, and transfer files instantly, eliminating manual paper bottlenecks and improving daily productivity.</p>
+                    <p class="text-secondary mb-0" style="font-size: 1.05rem; line-height: 1.7;">To empower academic and administrative offices at Debre Tabor University with a highly secure, efficient, and centralized digital platform for real-time document routing and archival, maximizing daily administrative productivity.</p>
                 </div>
             </div>
             <!-- Vision Card -->
@@ -177,21 +177,21 @@
                         <i class="bi bi-eye-fill" style="font-size: 2.5rem; color: #198754;"></i>
                     </div>
                     <h5 class="fw-bold text-dark">Our Vision</h5>
-                    <p class="text-secondary mb-0" style="font-size: 1.05rem; line-height: 1.7;">To transform higher education institutions and government offices into completely paperless, highly secure, and automated digital administrative environments across Ethiopia.</p>
+                    <p class="text-secondary mb-0" style="font-size: 1.05rem; line-height: 1.7;">To transform higher education institutions and government offices in Ethiopia into completely paperless, highly secure, and seamlessly automated digital administrative environments.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Contact Us Section (CORRECTED: Columns closer and beautifully centered) -->
+<!-- Contact Us Section -->
 <section id="contact" class="container my-5 py-4">
     <div class="text-center mb-5">
         <h2 class="fw-bold text-dark">Contact Us</h2>
         <p class="text-secondary">Get in touch with Debre Tabor University IT Administration.</p>
     </div>
     <div class="row justify-content-center">
-        <!-- Wrapper to pull columns inward (col-md-10) -->
+        <!-- Wrapper to pull columns inward -->
         <div class="col-md-10">
             <div class="row justify-content-center g-4">
                 <!-- Location -->
