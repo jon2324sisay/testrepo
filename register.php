@@ -22,7 +22,7 @@ if ($user_role !== 'Admin') {
     exit();
 }
 
-// Process registration form (Now with 3 separate Name Inputs!)
+// Process registration form (Now with 3 separate Name Inputs, Phone, and Email!)
 if (isset($_POST['register_btn'])) {
     $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
     $middle_name = mysqli_real_escape_string($conn, $_POST['middle_name']);
@@ -31,6 +31,8 @@ if (isset($_POST['register_btn'])) {
     $password = $_POST['new_password'];
     $role = mysqli_real_escape_string($conn, $_POST['role']);
     $department = mysqli_real_escape_string($conn, $_POST['department']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
 
     // Concatenate the 3 names into a single Full Name variable (Smart Coding!)
     $full_name = $first_name . ' ' . $middle_name . ' ' . $last_name;
@@ -38,9 +40,9 @@ if (isset($_POST['register_btn'])) {
     // Securely hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert new user into database including full_name
-    $query = "INSERT INTO users (full_name, username, password, role, department) 
-              VALUES ('$full_name', '$new_user', '$hashed_password', '$role', '$department')";
+    // Insert new user into database including full_name, phone, and email
+    $query = "INSERT INTO users (full_name, username, password, role, department, phone, email) 
+              VALUES ('$full_name', '$new_user', '$hashed_password', '$role', '$department', '$phone', '$email')";
     
     if (mysqli_query($conn, $query)) {
         // Log this activity (Audit Trail)
@@ -73,7 +75,7 @@ $dept_result = mysqli_query($conn, $dept_query);
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        body { background-color: #f1f3f7; font-size: 1.00rem; } /* Reduced global font size slightly for better screen fit */
+        body { background-color: #f1f3f7; font-size: 1.00rem; } 
         .navbar-custom { background-color: #1a365d; }
         .navbar-brand { font-size: 1.30rem; }
         .nav-link { font-size: 1.10rem; }
@@ -83,7 +85,7 @@ $dept_result = mysqli_query($conn, $dept_query);
 </head>
 <body>
 
-<!-- New Clean Universal Navigation Bar (Without search.php) -->
+<!-- Universal Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow-sm py-3">
     <div class="container">
         <a class="navbar-brand fw-bold" href="dashboard.php">
@@ -98,7 +100,7 @@ $dept_result = mysqli_query($conn, $dept_query);
                     <a class="nav-link" href="dashboard.php"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
                 </li>
                 
-                <!-- DROPDOWN 1: File Management (Cleaned up!) -->
+                <!-- DROPDOWN 1: File Management -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="docDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-file-earmark-text-fill me-1"></i> File Management
@@ -143,21 +145,20 @@ $dept_result = mysqli_query($conn, $dept_query);
     </div>
 </nav>
 
-<!-- Main Container (Upgraded: Compact mt-3 padding for better screen height fit) -->
-<div class="container mt-3 mb-5">
+<!-- Main Container -->
+<div class="container mt-4 mb-5">
     <div class="row justify-content-center">
-        <!-- Left Column: Registration Form (Upgraded: Horizontal Names Layout & Compact Spacing!) -->
-        <div class="col-md-4 mb-4">
+        <!-- Left Column: Registration Form -->
+        <div class="col-lg-4 mb-4">
             <div class="card shadow-sm border-0 rounded-3">
                 <div class="card-header bg-white py-3 fw-bold text-dark border-bottom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0"><i class="bi bi-person-plus-fill text-success me-2"></i>Register New user </h5>
                     <a href="dashboard.php" class="btn btn-sm btn-outline-secondary fw-bold">Back</a>
                 </div>
-                <!-- card-body padding is compact and clean (p-4) -->
                 <div class="card-body p-4">
                     <form action="register.php" method="POST">
                         
-                        <!-- 3 Names placed horizontally in a single row! (Saves massive space) -->
+                        <!-- 3 Names placed horizontally in a single row! -->
                         <div class="row g-2 mb-2">
                             <div class="col-md-4">
                                 <label for="first_name" class="form-label fw-semibold text-secondary small mb-1">First Name</label>
@@ -185,6 +186,18 @@ $dept_result = mysqli_query($conn, $dept_query);
                             <input type="password" class="form-control py-1" id="new_password" name="new_password" required placeholder="Enter password">
                         </div>
 
+                        <!-- Phone & Email (Upgraded: Placed horizontally side-by-side to save vertical space!) -->
+                        <div class="row g-2 mb-2">
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label fw-semibold text-secondary small mb-1">Phone Number</label>
+                                <input type="text" class="form-control py-1" id="phone" name="phone" required placeholder="0911..." autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label fw-semibold text-secondary small mb-1">Email Address</label>
+                                <input type="email" class="form-control py-1" id="email" name="email" required placeholder="example@mail.com" autocomplete="off">
+                            </div>
+                        </div>
+
                         <!-- Department Selection -->
                         <div class="mb-2">
                             <label for="department" class="form-label fw-semibold text-secondary small mb-1">Department / Office</label>
@@ -201,18 +214,17 @@ $dept_result = mysqli_query($conn, $dept_query);
                         </div>
 
                         <!-- Role Selection -->
-                        <div class="mb-2">
+                        <div class="mb-3">
                             <label for="role" class="form-label fw-semibold text-secondary small mb-1">System Role</label>
                             <select class="form-select py-1" id="role" name="role" required>
                                 <option value="Staff" selected>Staff (Secretary/Officer)</option>
                                 <option value="Manager">Manager </option>
-                               
                             </select>
                         </div>
 
                         <!-- Submit Button -->
-                        <div class="d-grid gap-2 mt-3">
-                            <button type="submit" name="register_btn" class="btn btn-success py-1.5 fw-bold shadow-sm">Register User</button>
+                        <div class="d-grid gap-2">
+                            <button type="submit" name="register_btn" class="btn btn-success py-2 fw-bold shadow-sm">Register User</button>
                         </div>
                     </form>
                 </div>
@@ -220,7 +232,7 @@ $dept_result = mysqli_query($conn, $dept_query);
         </div>
 
         <!-- Right Column: Registered Users Table -->
-        <div class="col-md-8">
+        <div class="col-lg-8">
             <div class="card shadow-sm border-0 rounded-3">
                 <div class="card-header bg-white py-3 fw-bold text-dark border-bottom d-flex justify-content-between align-items-center">
                     <span><i class="bi bi-people-fill text-primary me-2"></i>Registered Users Directory</span>
@@ -236,6 +248,7 @@ $dept_result = mysqli_query($conn, $dept_query);
                                     <tr>
                                         <th>Full Name</th>
                                         <th>Username</th>
+                                        <th>Contact Details</th> <!-- Combined Contact Details Column -->
                                         <th>Department / Office</th>
                                         <th>Role</th>
                                         <th>Status</th>
@@ -248,6 +261,11 @@ $dept_result = mysqli_query($conn, $dept_query);
                                             <tr>
                                                 <td class="fw-bold text-dark small"><?php echo htmlspecialchars($row['full_name']); ?></td>
                                                 <td class="small"><?php echo htmlspecialchars($row['username']); ?></td>
+                                                <!-- Contact Details rendering cleanly with Bootstrap Icons -->
+                                                <td class="small">
+                                                    <div class="mb-1"><i class="bi bi-telephone text-muted me-1"></i> <?php echo htmlspecialchars($row['phone'] ? $row['phone'] : 'N/A'); ?></div>
+                                                    <div class="text-secondary"><i class="bi bi-envelope text-muted me-1"></i> <?php echo htmlspecialchars($row['email'] ? $row['email'] : 'N/A'); ?></div>
+                                                </td>
                                                 <td class="small text-secondary"><?php echo htmlspecialchars($row['department'] ? $row['department'] : 'N/A'); ?></td>
                                                 <td><span class="badge bg-secondary"><?php echo htmlspecialchars($row['role']); ?></span></td>
                                                 <td>
@@ -269,7 +287,7 @@ $dept_result = mysqli_query($conn, $dept_query);
                                         <?php endwhile; ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="6" class="text-center text-secondary py-4">No other users registered in the system.</td>
+                                            <td colspan="7" class="text-center text-secondary py-4">No other users registered in the system.</td>
                                         </tr>
                                     <?php endif; ?>
                                 </tbody>
