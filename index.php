@@ -32,15 +32,22 @@
             padding-left: 20px;
             padding-right: 20px;
         }
+        /* Custom styles for Mission & Vision top borders */
+        .card-mission {
+            border-top: 4px solid #1a365d !important;
+        }
+        .card-vision {
+            border-top: 4px solid #198754 !important;
+        }
     </style>
 </head>
 <body>
 
-<!-- Navigation Bar -->
+<!-- Navigation Bar (Upgraded with Centered Menu & Right-Aligned Button) -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 sticky-top">
     <div class="container">
         <!-- Far Left: Brand Logo -->
-        <a class="navbar-brand fw-bold" href="index.php" style="color: #1a365d !important;">
+        <a class="navbar-brand fw-bold text-primary" href="index.php" style="color: #1a365d !important;">
             <i class="bi bi-folder-fill me-2"></i>Office File Management
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -104,6 +111,7 @@
         <p class="text-secondary">Explore the powerful digital capabilities of our archive system.</p>
     </div>
     <div class="row">
+        <!-- Service 1 -->
         <div class="col-md-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-4 feature-card">
                 <div class="text-primary mb-3">
@@ -113,6 +121,7 @@
                 <p class="text-secondary mb-0">Register document metadata and upload scanned files instantly to specific departments without leaving your desk.</p>
             </div>
         </div>
+        <!-- Service 2 -->
         <div class="col-md-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-4 feature-card">
                 <div class="text-primary mb-3">
@@ -122,6 +131,7 @@
                 <p class="text-secondary mb-0">Retrieve any letter or document from the archive within seconds using keyword search or department filters.</p>
             </div>
         </div>
+        <!-- Service 3 -->
         <div class="col-md-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-4 feature-card">
                 <div class="text-primary mb-3">
@@ -134,24 +144,47 @@
     </div>
 </section>
 
-<!-- About Us Section (CORRECTED: col-md-4 and col-md-8 applied) -->
+<!-- About Us, Mission & Vision Section (Upgraded: Icon is closer, and Mission/Vision cards are beautifully added!) -->
 <section id="about" class="bg-white py-5 border-top">
     <div class="container my-4">
-        <div class="row align-items-center">
-            <!-- Icon is now col-md-4 (Narrower) -->
+        <!-- Top Row: About Us Text and Icon (Icon closer) -->
+        <div class="row align-items-center mb-5">
             <div class="col-md-4 mb-4 mb-md-0 text-center">
                 <i class="bi bi-building-fill text-secondary opacity-25" style="font-size: 8rem;"></i>
             </div>
-            <!-- Text is now col-md-8 (Wider to pull closer to icon) -->
             <div class="col-md-8">
                 <h2 class="fw-bold text-dark mb-3">About Us</h2>
                 <p class="text-secondary" style="line-height: 1.8;">This portal is developed to eliminate administrative bottlenecks caused by paper filing. By transforming physical files into secure digital assets, the organization ensures data transparency, fast document routing, and physical storage space optimization.</p>
             </div>
         </div>
+
+        <!-- Bottom Row: Mission and Vision Cards -->
+        <div class="row justify-content-center g-4 mt-2">
+            <!-- Mission Card -->
+            <div class="col-md-5">
+                <div class="card h-100 border-0 shadow-sm p-4 card-mission" style="background-color: #f8f9fa;">
+                    <div class="mb-3">
+                        <i class="bi bi-target" style="font-size: 2.5rem; color: #1a365d;"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Our Mission</h5>
+                    <p class="text-secondary mb-0" style="font-size: 1.05rem; line-height: 1.7;">To provide office administrations with a secure, fast, and digital platform to upload, search, and transfer files instantly, eliminating manual paper bottlenecks and improving daily productivity.</p>
+                </div>
+            </div>
+            <!-- Vision Card -->
+            <div class="col-md-5">
+                <div class="card h-100 border-0 shadow-sm p-4 card-vision" style="background-color: #f8f9fa;">
+                    <div class="mb-3">
+                        <i class="bi bi-eye-fill" style="font-size: 2.5rem; color: #198754;"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Our Vision</h5>
+                    <p class="text-secondary mb-0" style="font-size: 1.05rem; line-height: 1.7;">To transform higher education institutions and government offices into completely paperless, highly secure, and automated digital administrative environments across Ethiopia.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Contact Us Section (CORRECTED: wrapped inside col-md-10 for closeness) -->
+<!-- Contact Us Section (CORRECTED: Columns closer and beautifully centered) -->
 <section id="contact" class="container my-5 py-4">
     <div class="text-center mb-5">
         <h2 class="fw-bold text-dark">Contact Us</h2>
